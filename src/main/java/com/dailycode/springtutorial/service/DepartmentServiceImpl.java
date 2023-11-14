@@ -5,6 +5,7 @@ import com.dailycode.springtutorial.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -34,5 +35,29 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public void deleteDepartmentById(Long departmentId) {
         departmentRepository.deleteById(departmentId);
+    }
+
+    @Override
+    public Department updateDepartmentById(Long departmentId, Department department) {
+
+        Department depDb = departmentRepository.findById(departmentId).get();
+
+        if(!depDb.getDepartmentName().isEmpty()
+                && !depDb.getDepartmentName().isBlank()
+                && Objects.nonNull(depDb.getDepartmentName())) {
+            depDb.setDepartmentName(department.getDepartmentName());
+        }
+        if(!depDb.getDepartmentCode().isEmpty()
+                && !depDb.getDepartmentCode().isBlank()
+                && Objects.nonNull(depDb.getDepartmentCode())) {
+            depDb.setDepartmentCode(department.getDepartmentCode());
+        }
+        if(!depDb.getDepartmentAddress().isEmpty()
+                && !depDb.getDepartmentAddress().isBlank()
+                && Objects.nonNull(depDb.getDepartmentAddress())) {
+            depDb.setDepartmentAddress(department.getDepartmentAddress());
+        }
+
+        return departmentRepository.save(depDb);
     }
 }
