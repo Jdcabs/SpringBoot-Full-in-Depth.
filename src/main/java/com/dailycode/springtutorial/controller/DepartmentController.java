@@ -2,9 +2,10 @@ package com.dailycode.springtutorial.controller;
 
 import com.dailycode.springtutorial.model.Department;
 import com.dailycode.springtutorial.service.DepartmentService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class DepartmentController {
@@ -18,5 +19,15 @@ public class DepartmentController {
     @PostMapping("/department")
     public Department saveDepartment(@RequestBody Department department) {
         return departmentService.saveDepartment(department);
+    }
+
+    @GetMapping("/department")
+    public List<Department> getAllDepartment() {
+        return departmentService.getAllDepartment();
+    }
+
+    @GetMapping("/department/{id}")
+    public Optional<Department> getDepartmentById(@PathVariable("id") Long departmentId) {
+        return departmentService.getDepartmentById(departmentId);
     }
 }
