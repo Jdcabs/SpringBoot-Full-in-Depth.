@@ -13,4 +13,6 @@ public interface DepartmentRepository extends JpaRepository<Department,Long> {
     @Query("select d from Department d where upper(d.departmentName) like upper(concat('%', ?1, '%'))")
     Optional<Department> FindByDepartmentName(@NonNull String departmentName);
 
+    Optional<Department> findByDepartmentName(String departmentName);
+    Optional<Department> findByDepartmentNameIgnoreCase(String departmentName);
 }

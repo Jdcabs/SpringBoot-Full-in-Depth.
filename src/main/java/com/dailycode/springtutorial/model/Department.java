@@ -2,6 +2,8 @@ package com.dailycode.springtutorial.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 public class Department {
     @Id
@@ -63,5 +65,18 @@ public class Department {
                 ", departmentAddress='" + departmentAddress + '\'' +
                 ", departmentCode='" + departmentCode + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return Objects.equals(getDepartmentId(), that.getDepartmentId()) && Objects.equals(getDepartmentName(), that.getDepartmentName()) && Objects.equals(getDepartmentAddress(), that.getDepartmentAddress()) && Objects.equals(getDepartmentCode(), that.getDepartmentCode());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDepartmentId(), getDepartmentName(), getDepartmentAddress(), getDepartmentCode());
     }
 }

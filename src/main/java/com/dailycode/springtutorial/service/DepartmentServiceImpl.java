@@ -4,6 +4,7 @@ import com.dailycode.springtutorial.model.Department;
 import com.dailycode.springtutorial.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
+import javax.management.RuntimeErrorException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -59,5 +60,12 @@ public class DepartmentServiceImpl implements DepartmentService{
         }
 
         return departmentRepository.save(depDb);
+    }
+
+    @Override
+    public Department getDepartmentByDepartmentName(String departmentName) {
+        return (departmentRepository.findByDepartmentNameIgnoreCase(departmentName).isPresent())
+                ? departmentRepository.findByDepartmentNameIgnoreCase(departmentName).get()
+                : departmentRepository.findByDepartmentNameIgnoreCase(departmentName).orElseThrow(() -> new RuntimeException("Cannot FInd this department"));
     }
 }
