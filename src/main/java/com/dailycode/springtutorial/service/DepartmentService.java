@@ -1,6 +1,7 @@
 package com.dailycode.springtutorial.service;
 
 import com.dailycode.springtutorial.model.Department;
+import com.dailycode.springtutorial.model.SecondDepartment;
 
 import java.util.List;
 import java.util.Optional;

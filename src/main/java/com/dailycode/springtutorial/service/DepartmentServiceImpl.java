@@ -4,7 +4,6 @@ import com.dailycode.springtutorial.model.Department;
 import com.dailycode.springtutorial.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
-import javax.management.RuntimeErrorException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

@@ -1,7 +1,10 @@
 package com.dailycode.springtutorial.controller;
 
 import com.dailycode.springtutorial.model.Department;
+import com.dailycode.springtutorial.model.SecondDepartment;
 import com.dailycode.springtutorial.service.DepartmentService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,13 +14,12 @@ import java.util.Optional;
 public class DepartmentController {
     
     private final DepartmentService departmentService;
-    
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentController(DepartmentService departmentService, SecondDepartment secondDepartment) {
         this.departmentService = departmentService;
     }
     
     @PostMapping("/department")
-    public Department saveDepartment(@RequestBody Department department) {
+    public Department saveDepartment(@Valid @RequestBody Department department) {
         return departmentService.saveDepartment(department);
     }
 
@@ -45,6 +47,7 @@ public class DepartmentController {
 
     @GetMapping("/department/name/{name}")
     public Department getDepartmentByDepartmentName(@PathVariable("name") String departmentName) {
+
         return departmentService.getDepartmentByDepartmentName(departmentName);
     }
 }

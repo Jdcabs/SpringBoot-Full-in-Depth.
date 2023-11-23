@@ -1,6 +1,7 @@
 package com.dailycode.springtutorial.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long departmentId;
     @Column(length = 100, nullable = false)
+    @NotBlank(message = "Please Add Department Name")
     private String departmentName;
     @Column(length = 150, nullable = false)
     private String departmentAddress;
@@ -72,7 +74,10 @@ public class Department {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return Objects.equals(getDepartmentId(), that.getDepartmentId()) && Objects.equals(getDepartmentName(), that.getDepartmentName()) && Objects.equals(getDepartmentAddress(), that.getDepartmentAddress()) && Objects.equals(getDepartmentCode(), that.getDepartmentCode());
+        return Objects.equals(getDepartmentId(), that.getDepartmentId())
+                && Objects.equals(getDepartmentName(), that.getDepartmentName())
+                && Objects.equals(getDepartmentAddress(), that.getDepartmentAddress())
+                && Objects.equals(getDepartmentCode(), that.getDepartmentCode());
     }
 
     @Override
