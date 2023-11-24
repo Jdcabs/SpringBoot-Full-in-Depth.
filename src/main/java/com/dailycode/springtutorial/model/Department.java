@@ -10,11 +10,14 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long departmentId;
+
     @Column(length = 100, nullable = false)
     @NotBlank(message = "Please Add Department Name")
     private String departmentName;
+    
     @Column(length = 150, nullable = false)
     private String departmentAddress;
+    
     @Column(length = 100, nullable = false)
     private String departmentCode;
 

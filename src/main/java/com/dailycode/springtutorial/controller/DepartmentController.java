@@ -1,30 +1,44 @@
 package com.dailycode.springtutorial.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.dailycode.springtutorial.model.Department;
 import com.dailycode.springtutorial.model.SecondDepartment;
 import com.dailycode.springtutorial.service.DepartmentService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import jakarta.validation.Valid;
 
 @RestController
 public class DepartmentController {
     
     private final DepartmentService departmentService;
-    public DepartmentController(DepartmentService departmentService, SecondDepartment secondDepartment) {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
+
+    public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
     
     @PostMapping("/department")
     public Department saveDepartment(@Valid @RequestBody Department department) {
+        LOGGER.info("THIS IS SAVEDEPARTMENT FROM DEPARTMENTCONTROLLER");
         return departmentService.saveDepartment(department);
     }
 
     @GetMapping("/department")
     public List<Department> getAllDepartment() {
+        LOGGER.info("THIS IS GETALLDEPARTMENT FROM DEPARTMENTCONTROLLER");
         return departmentService.getAllDepartment();
     }
 
