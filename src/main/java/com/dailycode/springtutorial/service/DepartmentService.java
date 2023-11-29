@@ -1,17 +1,17 @@
 package com.dailycode.springtutorial.service;
 
-import com.dailycode.springtutorial.model.Department;
-import com.dailycode.springtutorial.model.SecondDepartment;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.dailycode.springtutorial.Exception.DepartmentNotFoundException;
+import com.dailycode.springtutorial.model.Department;
 
 public interface DepartmentService {
     Department saveDepartment(Department department);
 
-    List<Department> getAllDepartment();
+    List<Department> getAllDepartment() throws DepartmentNotFoundException;
 
-    Optional<Department> getDepartmentById(Long departmentId);
+   Department getDepartmentById(Long departmentId) throws DepartmentNotFoundException;
 
     void deleteDepartmentById(Long departmentId);
 

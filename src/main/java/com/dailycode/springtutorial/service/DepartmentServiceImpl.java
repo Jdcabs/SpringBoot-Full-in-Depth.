@@ -1,5 +1,6 @@
 package com.dailycode.springtutorial.service;
 
+import com.dailycode.springtutorial.Exception.DepartmentNotFoundException;
 import com.dailycode.springtutorial.model.Department;
 import com.dailycode.springtutorial.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,25 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public List<Department> getAllDepartment() {
-        return departmentRepository.findAll();
+    public List<Department> getAllDepartment() throws DepartmentNotFoundException {
+
+        List<Department> list = departmentRepository.findAll();
+
+        if(list.isEmpty()) {
+            throw new DepartmentNotFoundException("There are no Department on the List.");
+        }
+        return list;
     }
 
     @Override
-    public Optional<Department> getDepartmentById(Long departmentId) {
-        return departmentRepository.findById(departmentId);
+    public Department getDepartmentById(Long departmentId) throws DepartmentNotFoundException {
+         
+        Optional<Department> department = departmentRepository.findById(departmentId);
+         
+         if(!department.isPresent()) {
+             throw new DepartmentNotFoundException("This Department with Id of " + departmentId + " Doesn't Exist.");
+         }
+         return department.get();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.dailycode.springtutorial.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.dailycode.springtutorial.Exception.DepartmentNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dailycode.springtutorial.model.Department;
-import com.dailycode.springtutorial.model.SecondDepartment;
 import com.dailycode.springtutorial.service.DepartmentService;
 
 import jakarta.validation.Valid;
@@ -37,13 +37,13 @@ public class DepartmentController {
     }
 
     @GetMapping("/department")
-    public List<Department> getAllDepartment() {
+    public List<Department> getAllDepartment() throws DepartmentNotFoundException{
         LOGGER.info("THIS IS GETALLDEPARTMENT FROM DEPARTMENTCONTROLLER");
         return departmentService.getAllDepartment();
     }
 
     @GetMapping("/department/{id}")
-    public Optional<Department> getDepartmentById(@PathVariable("id") Long departmentId) {
+    public Department getDepartmentById(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
         return departmentService.getDepartmentById(departmentId);
     }
 
